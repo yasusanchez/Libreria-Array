@@ -298,3 +298,15 @@ console.log("Resumen del libro con más páginas:");
 resumenLibroMasPaginas.forEach(libro => {
     console.log(`Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Páginas: ${libro.paginas}`);
 });
+
+// Define una función de comparación para ordenar los libros por número de páginas de mayor a menor
+const compararPorPaginas = (libroA, libroB) => {
+    return libroB.paginas - libroA.paginas;
+};
+
+// Ordena los libros utilizando la función de comparación
+libros.sort(compararPorPaginas);
+
+// Muestra los libros ordenados por número de páginas de mayor a menor
+console.log("Libros ordenados por número de páginas de mayor a menor:");
+libros.forEach(libro => console.log(libro.titulo, "-", libro.paginas, "páginas"));
