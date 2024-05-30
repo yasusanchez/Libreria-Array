@@ -272,3 +272,29 @@ const librosFormateadosConDescuento = librosConDescuento.map(libro => formatoLib
 // Mostrar los libros formateados con descuento
 console.log("Libros con descuento:");
 librosFormateadosConDescuento.forEach(libro => console.log(libro));
+
+// Filtrar los libros con precio mayor a 50 dólares
+const librosPrecioMayor50 = libros.filter(libro => libro.precio > 50);
+
+// Mostrar los libros que cumplen con el criterio
+console.log("Libros con precio mayor a 50 dólares:");
+librosPrecioMayor50.forEach(libro => console.log(libro));
+
+// Paso 1: Encontrar el libro con el número más alto de páginas
+const libroMasPaginas = libros.reduce((libroActual, libroSiguiente) => {
+    return libroActual.paginas > libroSiguiente.paginas ? libroActual : libroSiguiente;
+});
+
+// Paso 2: Crear un nuevo arreglo con los detalles del libro encontrado
+const resumenLibroMasPaginas = [{
+    titulo: libroMasPaginas.titulo,
+    autor: libroMasPaginas.autor,
+    editorial: libroMasPaginas.editorial,
+    paginas: libroMasPaginas.paginas
+}];
+
+// Paso 3: Mostrar el resumen del libro con el número más alto de páginas
+console.log("Resumen del libro con más páginas:");
+resumenLibroMasPaginas.forEach(libro => {
+    console.log(`Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Páginas: ${libro.paginas}`);
+});
