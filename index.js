@@ -243,3 +243,32 @@ iteraciones.forEach((iteracion, index) => {
     console.log(`Iteración ${index + 1}:`);
     iteracion.forEach(libro => console.log(libro.titulo));
 });
+
+// Agregar el atributo "descuento" a cada libro en el array
+const librosConDescuento = libros.map(libro => {
+    // Calcular el descuento como el 20% del precio actual
+    const descuento = libro.precio * 0.20;
+    // Crear un nuevo objeto libro con el atributo "descuento" agregado
+    return {
+        ...libro, // Copiar todas las propiedades existentes del libro
+        descuento // Agregar el atributo "descuento"
+    };
+});
+
+// Mostrar los libros con el atributo "descuento"
+console.log("Libros con descuento:");
+librosConDescuento.forEach(libro => {
+    console.log(libro);
+});
+
+// Función para formatear la información de un libro con descuento
+const formatoLibroConDescuento = (libro) => {
+    return `Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Precio: ${libro.precio}, Descuento: ${libro.descuento}`;
+};
+
+// Utilizando el método .map para aplicar la función a cada libro con descuento
+const librosFormateadosConDescuento = librosConDescuento.map(libro => formatoLibroConDescuento(libro));
+
+// Mostrar los libros formateados con descuento
+console.log("Libros con descuento:");
+librosFormateadosConDescuento.forEach(libro => console.log(libro));
