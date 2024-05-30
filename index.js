@@ -188,3 +188,58 @@ const ejecutarAccion = (opcion) => {
             readline.question('Seleccione una opción: ', ejecutarAccion);
     }
 };
+
+// Para Eliminar los primeros cinco libros que no son de la editorial específica
+libros.splice(0, 5);
+
+// Para Añadir cinco nuevos libros de la editorial específica al principio del array libros
+libros.unshift(
+    new Libro("Libro 21", "Autor 21", "Género 21", "Español", 26.99, "Tapa dura", "ISBN21", "Descripción del libro 21", "Nuevo", "Ubicación 21", "2023-01-21", "Editorial Específica", 220, "15x20x2 cm", "0.5 kg"),
+    new Libro("Libro 22", "Autor 22", "Género 22", "Español", 31.99, "Tapa blanda", "ISBN22", "Descripción del libro 22", "Nuevo", "Ubicación 22", "2023-01-22", "Editorial Específica", 160, "14x21x2 cm", "0.4 kg"),
+    new Libro("Libro 23", "Autor 23", "Género 23", "Español", 16.99, "Ebook", "ISBN23", "Descripción del libro 23", "Nuevo", "Ubicación 23", "2023-01-23", "Editorial Específica", 310, "16x23x3 cm", "0.6 kg"),
+    new Libro("Libro 24", "Autor 24", "Género 24", "Español", 21.99, "Tapa dura", "ISBN24", "Descripción del libro 24", "Nuevo", "Ubicación 24", "2023-01-24", "Editorial Específica", 260, "17x24x3 cm", "0.7 kg"),
+    new Libro("Libro 25", "Autor 25", "Género 25", "Español", 23.99, "Tapa blanda", "ISBN25", "Descripción del libro 25", "Nuevo", "Ubicación 25", "2023-01-25", "Editorial Específica", 120, "18x25x2 cm", "0.3 kg")
+);
+
+// Esta Función es para formatear la información de un libro
+const formatoLibro = (libro) => {
+    return `Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Precio: ${libro.precio}`;
+};
+
+// Utilizando el método .map para aplicar la función a cada libro
+const librosFormateados = libros.map(libro => formatoLibro(libro));
+
+// Mostrar los libros formateados
+console.log("Libros:");
+librosFormateados.forEach(libro => console.log(libro));
+
+// Crear 10 iteraciones diferentes manteniendo el atributo Titulo
+const iteraciones = [];
+for (let i = 0; i < 10; i++) {
+    const librosModificados = libros.map((libro, index) => {
+        return new Libro(
+            `Libro ${index + 1 + (i * 10)}`,
+            libro.autor,
+            libro.genero,
+            libro.idioma,
+            libro.precio + (i * 5), // Modificar el precio para cada iteración
+            libro.formato,
+            libro.isbn,
+            libro.descripcion,
+            libro.estado,
+            libro.ubicacion,
+            libro.fecha_publicacion,
+            libro.editorial,
+            libro.paginas,
+            libro.dimensiones,
+            libro.peso
+        );
+    });
+    iteraciones.push(librosModificados);
+}
+
+// Mostrar los títulos de los libros de cada iteración
+iteraciones.forEach((iteracion, index) => {
+    console.log(`Iteración ${index + 1}:`);
+    iteracion.forEach(libro => console.log(libro.titulo));
+});
