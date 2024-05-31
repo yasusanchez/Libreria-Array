@@ -448,3 +448,145 @@ function resumenesEncadenados() {
     console.log("Libros por número más alto de páginas ordenados de mayor a menor:");
     console.table(librosPorPaginas);
 }
+
+
+function buscarLibroPorTitulo(titulo) {
+    const libroEncontrado = pilaLibros.find(libro => libro.titulo === titulo);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por título:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorAutor(autor) {
+    const libroEncontrado = pilaLibros.find(libro => libro.autor === autor);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por autor:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorFechaPublicacion(fecha) {
+    const libroEncontrado = pilaLibros.find(libro => libro.fechaPublicacion === fecha);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por fecha de publicación:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorGenero(genero) {
+    const libroEncontrado = pilaLibros.find(libro => libro.genero === genero);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por género:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorIdioma(idioma) {
+    const libroEncontrado = pilaLibros.find(libro => libro.idioma === idioma);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por idioma:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+
+function iteracionesDeBusqueda() {
+    const titulos = [
+        'Cien años de soledad', 'El amor en los tiempos del cólera', 'El Señor de los Anillos: La Comunidad del Anillo', '1984', 'Orgullo y Prejuicio',
+        'Harry Potter y la Piedra Filosofal', 'El Hobbit', 'Matar a un Ruiseñor', 'Don Quijote de la Mancha', 'Crónicas Marcianas'
+    ];
+
+    for (let i = 0; i < titulos.length; i++) {
+        buscarLibroPorTitulo(titulos[i]);
+    }
+}
+
+
+function menu() {
+    let opcion;
+    do {
+        opcion = prompt(`Seleccione una opción:
+        1. Agregar libro
+        2. Quitar libro
+        3. Mostrar pila de libros
+        4. Listar libros
+        5. Listar libros con descuento
+        6. Libros caros y resumen
+        7. Ordenar libros por páginas
+        8. Resúmenes encadenados
+        9. Buscar libro por título
+        10. Buscar libro por autor
+        11. Buscar libro por fecha de publicación
+        12. Buscar libro por género
+        13. Buscar libro por idioma
+        14. Iteraciones de búsqueda
+        15. Salir`);
+        
+        switch (opcion) {
+            case '1':
+                agregarLibro();
+                break;
+            case '2':
+                quitarLibro();
+                break;
+            case '3':
+                mostrarPila();
+                break;
+            case '4':
+                listarLibros();
+                break;
+            case '5':
+                listarLibrosConDescuento();
+                break;
+            case '6':
+                librosCarosYResumen();
+                break;
+            case '7':
+                ordenarLibrosPorPaginas();
+                break;
+            case '8':
+                resumenesEncadenados();
+                break;
+            case '9':
+                const titulo = prompt("Ingrese el título del libro:");
+                buscarLibroPorTitulo(titulo);
+                break;
+            case '10':
+                const autor = prompt("Ingrese el autor del libro:");
+                buscarLibroPorAutor(autor);
+                break;
+            case '11':
+                const fecha = prompt("Ingrese la fecha de publicación del libro (YYYY-MM-DD):");
+                buscarLibroPorFechaPublicacion(fecha);
+                break;
+            case '12':
+                const genero = prompt("Ingrese el género del libro:");
+                buscarLibroPorGenero(genero);
+                break;
+            case '13':
+                const idioma = prompt("Ingrese el idioma del libro:");
+                buscarLibroPorIdioma(idioma);
+                break;
+            case '14':
+                iteracionesDeBusqueda();
+                break;
+            case '15':
+                console.log("Saliendo...");
+                break;
+            default:
+                console.log("Opción no válida");
+        }
+    } while (opcion !== '15');
+}
+menu();
