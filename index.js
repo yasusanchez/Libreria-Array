@@ -1,5 +1,5 @@
 class Libro {
-    constructor(titulo, autor, genero, idioma, precio, formato, isbn, descripcion, estado, ubicacion, fecha_publicacion, editorial, paginas, dimensiones, peso) {
+    constructor(titulo, autor, genero, idioma, precio, formato, isbn, descripcion, estado, ubicacion, fechaPublicacion, editorial, paginas, dimensiones, peso) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
@@ -10,7 +10,7 @@ class Libro {
         this.descripcion = descripcion;
         this.estado = estado;
         this.ubicacion = ubicacion;
-        this.fecha_publicacion = fecha_publicacion;
+        this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
         this.paginas = paginas;
         this.dimensiones = dimensiones;
@@ -18,295 +18,577 @@ class Libro {
     }
 }
 
-class PilaDeLibros {
-    constructor() {
-        this.pila = [];
+// Pila
+let pilaLibros = [
+    {
+        titulo: "Cien años de soledad",
+        autor: "Gabriel García Márquez",
+        genero: "Realismo mágico",
+        idioma: "Español",
+        precio: 15,
+        formato: "Tapa blanda",
+        isbn: "978-84-9759-648-2",
+        descripcion: "Una novela que narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.",
+        estado: "Nuevo",
+        ubicacion: "Librería Central",
+        fecha_publicacion: "30 de mayo de 1967",
+        editorial: "Sudamericana",
+        paginas: 432,
+        dimensiones: "14 x 21 cm",
+        peso: "500 gramos"
+    },
+    {
+        titulo: "El amor en los tiempos del cólera",
+        autor: "Gabriel García Márquez",
+        genero: "Romance",
+        idioma: "Español",
+        precio: 12,
+        formato: "Ebook",
+        isbn: "978-84-322-0863-1",
+        descripcion: "La historia de amor entre Florentino Ariza y Fermina Daza, que perdura a lo largo de décadas.",
+        estado: "Como nuevo",
+        ubicacion: "Librería Moderna",
+        fecha_publicacion: "16 de octubre de 1985",
+        editorial: "Mondadori",
+        paginas: 368,
+        dimensiones: "12 x 18 cm",
+        peso: "300 gramos"
+    },
+    {
+        titulo: "El Señor de los Anillos: La Comunidad del Anillo",
+        autor: "J.R.R. Tolkien",
+        genero: "Fantasía",
+        idioma: "Español",
+        precio: 20,
+        formato: "Tapa dura",
+        isbn: "978-84-450-7429-6",
+        descripcion: "El primer libro de la trilogía épica que sigue la búsqueda de un grupo para destruir un poderoso anillo.",
+        estado: "Nuevo",
+        ubicacion: "Librería Épica",
+        fecha_publicacion: "29 de julio de 1954",
+        editorial: "Minotauro",
+        paginas: 576,
+        dimensiones: "16 x 24 cm",
+        peso: "700 gramos"
+    },
+    {
+        titulo: "1984",
+        autor: "George Orwell",
+        genero: "Distopía",
+        idioma: "Inglés",
+        precio: 18,
+        formato: "Tapa blanda",
+        isbn: "978-0-452-28423-4",
+        descripcion: "Una novela distópica que sigue la vida de Winston Smith en un estado totalitario.",
+        estado: "Usado",
+        ubicacion: "Librería del Futuro",
+        fecha_publicacion: "8 de junio de 1949",
+        editorial: "Secker & Warburg",
+        paginas: 328,
+        dimensiones: "13 x 20 cm",
+        peso: "450 gramos"
+    },
+    {
+        titulo: "Orgullo y Prejuicio",
+        autor: "Jane Austen",
+        genero: "Clásico",
+        idioma: "Inglés",
+        precio: 14,
+        formato: "Tapa blanda",
+        isbn: "978-84-663-4687-0",
+        descripcion: "La historia de Elizabeth Bennet y su relación con el altivo Sr. Darcy.",
+        estado: "Como nuevo",
+        ubicacion: "Librería Austen",
+        fecha_publicacion: "28 de enero de 1813",
+        editorial: "Penguin",
+        paginas: 416,
+        dimensiones: "12 x 18 cm",
+        peso: "350 gramos"
+    },
+    {
+        titulo: "Harry Potter y la Piedra Filosofal",
+        autor: "J.K. Rowling",
+        genero: "Fantasía",
+        idioma: "Español",
+        precio: 16,
+        formato: "Tapa dura",
+        isbn: "978-84-9838-521-8",
+        descripcion: "La primera entrega de la serie de libros sobre el joven mago Harry Potter.",
+        estado: "Nuevo",
+        ubicacion: "Librería Mágica",
+        fecha_publicacion: "26 de junio de 1997",
+        editorial: "Salamandra",
+        paginas: 256,
+        dimensiones: "15 x 22 cm",
+        peso: "600 gramos"
+    },
+    {
+        titulo: "El Hobbit",
+        autor: "J.R.R. Tolkien",
+        genero: "Fantasía",
+        idioma: "Español",
+        precio: 14,
+        formato: "Tapa blanda",
+        isbn: "978-84-450-7172-1",
+        descripcion: "La historia del hobbit Bilbo Bolsón, que emprende una aventura para recuperar un tesoro robado.",
+        estado: "Nuevo",
+        ubicacion: "Librería de la Colina",
+        fecha_publicacion: "21 de septiembre de 1937",
+        editorial: "Minotauro",
+        paginas: 320,
+        dimensiones: "14 x 21 cm",
+        peso: "400 gramos"
+    },
+    {
+        titulo: "Matar a un Ruiseñor",
+        autor: "Harper Lee",
+        genero: "Ficción",
+        idioma: "Inglés",
+        precio: 13,
+        formato: "Tapa blanda",
+        isbn: "978-84-204-6344-7",
+        descripcion: "La historia de Scout Finch y su padre Atticus mientras luchan contra el racismo en el sur de Estados Unidos.",
+        estado: "Nuevo",
+        ubicacion: "Librería Finch",
+        fecha_publicacion: "11 de julio de 1960",
+        editorial: "Alonso",
+        paginas: 320,
+        dimensiones: "13 x 20 cm",
+        peso: "380 gramos"
+    },
+    {
+        titulo: "Don Quijote de la Mancha",
+        autor: "Miguel de Cervantes",
+        genero: "Novela",
+        idioma: "Español",
+        precio: 22,
+        formato: "Tapa dura",
+        isbn: "978-84-670-0222-0",
+        descripcion: "La obra maestra de la literatura española que sigue las aventuras del caballero Don Quijote y su fiel escudero Sancho Panza.",
+        estado: "Como nuevo",
+        ubicacion: "Librería de la Mancha",
+        fecha_publicacion: "16 de enero de 1605",
+        editorial: "Espasa Calpe",
+        paginas: 1024,
+        dimensiones: "17 x 24 cm",
+        peso: "900 gramos"
+    },
+    {
+        titulo: "Crónicas Marcianas",
+        autor: "Ray Bradbury",
+        genero: "Ciencia ficción",
+        idioma: "Inglés",
+        precio: 17,
+        formato: "Tapa blanda",
+        isbn: "978-84-204-8581-4",
+        descripcion: "Una colección de relatos que exploran la colonización de Marte y las complejidades de la condición humana.",
+        estado: "Nuevo",
+        ubicacion: "Librería Extraterrestre",
+        fecha_publicacion: "22 de mayo de 1950",
+        editorial: "Minotauro",
+        paginas: 304,
+        dimensiones: "14 x 21 cm",
+        peso: "450 gramos"
+    },
+    {
+        titulo: "Neuromante",
+        autor: "William Gibson",
+        gener: "Ciencia ficción",
+        idioma: "Inglés",
+        precio: 16,
+        formato: "Tapa blanda",
+        isbn: "978-0-441-56956-2",
+        descripcion: "En un futuro distópico, Case, un hacker, es contratado para realizar un último trabajo que podría cambiar su destino para siempre en un mundo dominado por la tecnología y las corporaciones.",
+        estado: "Nuevo",
+        ubicacion: "Librería Cyberpunk",
+        fecha_publicacion: "1 de julio de 1984",
+        editorial: "Ace Books",
+        paginas: 320,
+        dimensiones: "13 x 20 cm",
+        peso: "400 gramos"
+    },
+    {
+        titulo: "Fundación",
+        autor: "Isaac Asimov",
+        genero: "Ciencia ficción",
+        idioma: "Español",
+        precio: 19,
+        formato: "Tapa dura",
+        isbn: "978-84-204-5974-6",
+        descripcion: "La historia de la Fundación, una institución encargada de preservar el conocimiento humano en un futuro lejano, enfrentándose a la decadencia del Imperio Galáctico.",
+        estado: "Nuevo",
+        ubicacion: "Librería Galáctica",
+        fecha_publicacion: "1 de junio de 1951",
+        editorial: "Debolsillo",
+        paginas: 240,
+        dimensiones: "15 x 23 cm",
+        peso: "600 gramos"
+    },
+    {
+        titulo: "Un Mundo Feliz",
+        autor: "Aldous Huxley",
+        genero: "Distopía",
+        idioma: "Inglés",
+        precio: 18,
+        formato: "Tapa blanda",
+        isbn: "978-84-9793-097-5",
+        descripcion: "En un futuro donde la sociedad está controlada mediante el condicionamiento y la manipulación genética, un hombre cuestiona los fundamentos de su mundo 'perfecto'.",
+        estado: "Nuevo",
+        ubicacion: "Librería Utopía",
+        fecha_publicacion: "1 de enero de 1932",
+        editorial: "Edhasa",
+        paginas: 320,
+        dimensiones: "13 x 20 cm",
+        peso: "350 gramos"
+    },
+    {
+        titulo: "El Silmarillion",
+        autor: "J.R.R. Tolkien",
+        genero: "Fantasía",
+        idioma: "Español",
+        precio: 20,
+        formato: "Tapa dura",
+        isbn: "978-84-450-7378-7",
+        descripcion: "Una obra que narra la historia de la Tierra Media desde su creación hasta los eventos que preceden a 'El Señor de los Anillos', explorando mitos, leyendas y el origen de razas y personajes.",
+        estado: "Nuevo",
+        ubicacion: "Librería Épica",
+        fecha_publicacion: "15 de septiembre de 1977",
+        editorial: "Minotauro",
+        paginas: 416,
+        dimensiones: "16 x 24 cm",
+        peso: "800 gramos"
+    },
+    {
+        titulo: "La Sombra del Viento",
+        autor: "Carlos Ruiz Zafón",
+        genero: "Misterio",
+        idioma: "Español",
+        precio: 16,
+        formato: "Tapa blanda",
+        isbn: "978-84-204-1136-4",
+        descripcion: "Ambientada en la Barcelona de la posguerra, esta novela sigue a Daniel Sempere mientras descubre un misterioso libro que cambiará su vida para siempre.",
+        estado: "Nuevo",
+        ubicacion: "Librería de los Susurros",
+        fecha_publicacion: "1 de enero de 2001",
+        editorial: "Planeta",
+        paginas: 544,
+        dimensiones: "15 x 23 cm",
+        peso: "600 gramos"
+    },
+    {
+        titulo: "El Principito",
+        autor: "Antoine de Saint-Exupéry",
+        genero: "Fábula",
+        idioma: "Español",
+        precio: 10,
+        formato: "Tapa dura",
+        isbn: "978-84-479-2151-7",
+        descripcion: "Un clásico de la literatura universal que narra las aventuras de un niño que viaja de planeta en planeta, descubriendo la verdadera esencia de la vida.",
+        estado: "Como nuevo",
+        ubicacion: "Librería Estelar",
+        fecha_publicacion: "6 de abril de 1943",
+        editorial: "Salamandra",
+        paginas: 96,
+        dimensiones: "13 x 20 cm",
+        peso: "200 gramos"
+    },
+    {
+        titulo: "Los Juegos del Hambre",
+        autor: "Suzanne Collins",
+        genero: "Ciencia ficción, Aventura",
+        idioma: "Español",
+        precio: 15,
+        formato: "Tapa blanda",
+        isbn: "978-84-246-5643-0",
+        descripcion: "En un mundo distópico, Katniss Everdeen se convierte en el símbolo de una rebelión contra el Capitolio al participar en los mortales Juegos del Hambre.",
+        estado: "Nuevo",
+        ubicacion: "Librería Rebelde",
+        fecha_publicacion: "28 de septiembre de 2008",
+        editorial: "RBA Molino",
+        paginas: 416,
+        dimensiones: "14 x 22 cm",
+        peso: "500 gramos"
+    },
+    {
+        titulo: "El Perfume: Historia de un asesino",
+        autor: "Patrick Süskind",
+        genero: "Novela histórica, Misterio",
+        idioma: "Español",
+        precio: 13,
+        formato: "Tapa blanda",
+        isbn: "978-84-339-7484-6",
+        descripcion: "Jean-Baptiste Grenouille nace con un don extraordinario: un olfato prodigioso que lo lleva a convertirse en un asesino obsesionado por capturar la esencia de la belleza.",
+        estado: "Usado",
+        ubicacion: "Librería Aromas",
+        fecha_publicacion: "17 de octubre de 1985",
+        editorial: "Anagrama",
+        paginas: 304,
+        dimensiones: "12 x 18 cm",
+        peso: "350 gramos"
+    },
+    {
+        titulo: "La Odisea",
+        autor: "Homero",
+        genero: "Epopeya",
+        idioma: "Español",
+        precio: 11,
+        formato: "Tapa blanda",
+        isbn: "978-84-376-0494-5",
+        descripcion: "El épico viaje de Odiseo de regreso a casa después de la Guerra de Troya, enfrentándose a monstruos, dioses y pruebas durante veinte años.",
+        estado: "Nuevo",
+        ubicacion: "Librería Olimpo",
+        fecha_publicacion: "Siglo VIII a.C.",
+        editorial: "Cátedra",
+        paginas: 384,
+        dimensiones: "13 x 20 cm",
+        peso: "450 gramos"
+    },
+    {
+        titulo: "El Alquimista",
+        autor: "Paulo Coelho",
+        genero: "Ficción, Espiritualidad",
+        idioma: "Español",
+        precio: 12,
+        formato: "Ebook",
+        isbn: "978-84-08-01794-9",
+        descripcion: "Santiago emprende un viaje en busca de un tesoro oculto, descubriendo en el camino lecciones sobre la vida, el amor y el destino.",
+        estado: "Como nuevo",
+        ubicacion: "Librería Alquimia",
+        fecha_publicacion: "1 de enero de 1988",
+        editorial: "Planeta",
+        paginas: 192,
+        dimensiones: "-",
+        peso: "-"
     }
-
-    push(libro) {
-        this.pila.push(libro);
-    }
-
-    pop() {
-        if (this.pila.length === 0) {
-            console.log("La pila está vacía.");
-            return null;
-        }
-        return this.pila.pop();
-    }
-
-    mostrarPila() {
-        if (this.pila.length === 0) {
-            console.log("La pila está vacía.");
-            return;
-        }
-        console.log("Pila de Libros:");
-        for (let i = this.pila.length - 1; i >= 0; i--) {
-            console.log(`- ${this.pila[i].titulo} por ${this.pila[i].autor}`);
-        }
-    }
-}
-
-// Crear 20 libros diferentes, incluyendo 5 de una editorial específica
-const libros = [
-    new Libro("Libro 1", "Autor 1", "Género 1", "Español", 25.99, "Tapa dura", "ISBN1", "Descripción del libro 1", "Nuevo", "Ubicación 1", "2023-01-01", "Editorial Específica", 200, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 2", "Autor 2", "Género 2", "Español", 30.99, "Tapa blanda", "ISBN2", "Descripción del libro 2", "Nuevo", "Ubicación 2", "2023-01-02", "Editorial Específica", 150, "14x21x2 cm", "0.4 kg"),
-    new Libro("Libro 3", "Autor 3", "Género 3", "Español", 15.99, "Ebook", "ISBN3", "Descripción del libro 3", "Nuevo", "Ubicación 3", "2023-01-03", "Editorial Específica", 300, "16x23x3 cm", "0.6 kg"),
-    new Libro("Libro 4", "Autor 4", "Género 4", "Español", 20.99, "Tapa dura", "ISBN4", "Descripción del libro 4", "Nuevo", "Ubicación 4", "2023-01-04", "Editorial Específica", 250, "17x24x3 cm", "0.7 kg"),
-    new Libro("Libro 5", "Autor 5", "Género 5", "Español", 22.99, "Tapa blanda", "ISBN5", "Descripción del libro 5", "Nuevo", "Ubicación 5", "2023-01-05", "Editorial Específica", 100, "18x25x2 cm", "0.3 kg"),
-    new Libro("Libro 6", "Autor 6", "Género 6", "Español", 18.99, "Ebook", "ISBN6", "Descripción del libro 6", "Nuevo", "Ubicación 6", "2023-01-06", "Otra Editorial", 220, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 7", "Autor 7", "Género 7", "Español", 19.99, "Tapa dura", "ISBN7", "Descripción del libro 7", "Nuevo", "Ubicación 7", "2023-01-07", "Otra Editorial", 210, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 8", "Autor 8", "Género 8", "Español", 21.99, "Tapa blanda", "ISBN8", "Descripción del libro 8", "Nuevo", "Ubicación 8", "2023-01-08", "Otra Editorial", 240, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 9", "Autor 9", "Género 9", "Español", 23.99, "Ebook", "ISBN9", "Descripción del libro 9", "Nuevo", "Ubicación 9", "2023-01-09", "Otra Editorial", 260, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 10", "Autor 10", "Género 10", "Español", 24.99, "Tapa dura", "ISBN10", "Descripción del libro 10", "Nuevo", "Ubicación 10", "2023-01-10", "Otra Editorial", 280, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 11", "Autor 11", "Género 11", "Español", 25.99, "Tapa dura", "ISBN11", "Descripción del libro 11", "Nuevo", "Ubicación 11", "2023-01-11", "Otra Editorial", 200, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 12", "Autor 12", "Género 12", "Español", 30.99, "Tapa blanda", "ISBN12", "Descripción del libro 12", "Nuevo", "Ubicación 12", "2023-01-12", "Otra Editorial", 150, "14x21x2 cm", "0.4 kg"),
-    new Libro("Libro 13", "Autor 13", "Género 13", "Español", 15.99, "Ebook", "ISBN13", "Descripción del libro 13", "Nuevo", "Ubicación 13", "2023-01-13", "Otra Editorial", 300, "16x23x3 cm", "0.6 kg"),
-    new Libro("Libro 14", "Autor 14", "Género 14", "Español", 20.99, "Tapa dura", "ISBN14", "Descripción del libro 14", "Nuevo", "Ubicación 14", "2023-01-14", "Otra Editorial", 250, "17x24x3 cm", "0.7 kg"),
-    new Libro("Libro 15", "Autor 15", "Género 15", "Español", 22.99, "Tapa blanda", "ISBN15", "Descripción del libro 15", "Nuevo", "Ubicación 15", "2023-01-15", "Otra Editorial", 100, "18x25x2 cm", "0.3 kg"),
-    new Libro("Libro 16", "Autor 16", "Género 16", "Español", 18.99, "Ebook", "ISBN16", "Descripción del libro 16", "Nuevo", "Ubicación 16", "2023-01-16", "Otra Editorial", 220, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 17", "Autor 17", "Género 17", "Español", 19.99, "Tapa dura", "ISBN17", "Descripción del libro 17", "Nuevo", "Ubicación 17", "2023-01-17", "Otra Editorial", 210, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 18", "Autor 18", "Género 18", "Español", 21.99, "Tapa blanda", "ISBN18", "Descripción del libro 18", "Nuevo", "Ubicación 18", "2023-01-18", "Otra Editorial", 240, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 19", "Autor 19", "Género 19", "Español", 23.99, "Ebook", "ISBN19", "Descripción del libro 19", "Nuevo", "Ubicación 19", "2023-01-19", "Otra Editorial", 260, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 20", "Autor 20", "Género 20", "Español", 24.99, "Tapa dura", "ISBN20", "Descripción del libro 20", "Nuevo", "Ubicación 20", "2023-01-20", "Otra Editorial", 280, "15x20x2 cm", "0.5 kg")
 ];
 
-const pilaDeLibros = new PilaDeLibros();
-libros.forEach(libro => pilaDeLibros.push(libro));
-
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-const mostrarMenu = () => {
-    console.log("\nMenu:");
-    console.log("1. Agregar un libro a la pila");
-    console.log("2. Quitar un libro de la pila");
-    console.log("3. Mostrar la pila de libros");
-    console.log("4. Salir");
-};
-
-const obtenerDetallesDelLibro = (callback) => {
-    const detalles = {};
-    const preguntas = [
-        "Ingrese el título del libro: ",
-        "Ingrese el autor del libro: ",
-        "Ingrese el género del libro: ",
-        "Ingrese el idioma del libro: ",
-        "Ingrese el precio del libro: ",
-        "Ingrese el formato del libro: ",
-        "Ingrese el ISBN del libro: ",
-        "Ingrese la descripción del libro: ",
-        "Ingrese el estado del libro: ",
-        "Ingrese la ubicación del libro: ",
-        "Ingrese la fecha de publicación del libro (YYYY-MM-DD): ",
-        "Ingrese la editorial del libro: ",
-        "Ingrese el número de páginas del libro: ",
-        "Ingrese las dimensiones del libro (ancho x profundidad x altura): ",
-        "Ingrese el peso del libro: "
-    ];
-    let index = 0;
-
-    const hacerPregunta = () => {
-        if (index < preguntas.length) {
-            readline.question(preguntas[index], (respuesta) => {
-                switch (index) {
-                    case 0: detalles.titulo = respuesta; break;
-                    case 1: detalles.autor = respuesta; break;
-                    case 2: detalles.genero = respuesta; break;
-                    case 3: detalles.idioma = respuesta; break;
-                    case 4: detalles.precio = parseFloat(respuesta); break;
-                    case 5: detalles.formato = respuesta; break;
-                    case 6: detalles.isbn = respuesta; break;
-                    case 7: detalles.descripcion = respuesta; break;
-                    case 8: detalles.estado = respuesta; break;
-                    case 9: detalles.ubicacion = respuesta; break;
-                    case 10: detalles.fecha_publicacion = respuesta; break;
-                    case 11: detalles.editorial = respuesta; break;
-                    case 12: detalles.paginas = parseInt(respuesta); break;
-                    case 13: detalles.dimensiones = respuesta; break;
-                    case 14: detalles.peso = respuesta; break;
-                }
-                index++;
-                hacerPregunta();
-            });
-        } else {
-            const libro = new Libro(
-                detalles.titulo,
-                detalles.autor,
-                detalles.genero,
-                detalles.idioma,
-                detalles.precio,
-                detalles.formato,
-                detalles.isbn,
-                detalles.descripcion,
-                detalles.estado,
-                detalles.ubicacion,
-                detalles.fecha_publicacion,
-                detalles.editorial,
-                detalles.paginas,
-                detalles.dimensiones,
-                detalles.peso
-            );
-            callback(libro);
-        }
-    };
-
-    hacerPregunta();
-};
-
-const ejecutarAccion = (opcion) => {
-    switch (opcion) {
-        case '1':
-            obtenerDetallesDelLibro((libro) => {
-                pilaDeLibros.push(libro);
-                console.log(`Se agregó el libro: ${libro.titulo}`);
-                mostrarMenu();
-                readline.question('Seleccione una opción: ', ejecutarAccion);
-            });
-            break;
-        case '2':
-            const libroRemovido = pilaDeLibros.pop();
-            if (libroRemovido) {
-                console.log(`Se quitó el libro: ${libroRemovido.titulo}`);
-            }
-            mostrarMenu();
-            readline.question('Seleccione una opción: ', ejecutarAccion);
-            break;
-        case '3':
-            pilaDeLibros.mostrarPila();
-            mostrarMenu();
-            readline.question('Seleccione una opción: ', ejecutarAccion);
-            break;
-        case '4':
-            readline.close();
-            return;
-        default:
-            console.log("Opción no válida.");
-            mostrarMenu();
-            readline.question('Seleccione una opción: ', ejecutarAccion);
-    }
-};
-
-// Para Eliminar los primeros cinco libros que no son de la editorial específica
-libros.splice(0, 5);
-
-// Para Añadir cinco nuevos libros de la editorial específica al principio del array libros
-libros.unshift(
-    new Libro("Libro 21", "Autor 21", "Género 21", "Español", 26.99, "Tapa dura", "ISBN21", "Descripción del libro 21", "Nuevo", "Ubicación 21", "2023-01-21", "Editorial Específica", 220, "15x20x2 cm", "0.5 kg"),
-    new Libro("Libro 22", "Autor 22", "Género 22", "Español", 31.99, "Tapa blanda", "ISBN22", "Descripción del libro 22", "Nuevo", "Ubicación 22", "2023-01-22", "Editorial Específica", 160, "14x21x2 cm", "0.4 kg"),
-    new Libro("Libro 23", "Autor 23", "Género 23", "Español", 16.99, "Ebook", "ISBN23", "Descripción del libro 23", "Nuevo", "Ubicación 23", "2023-01-23", "Editorial Específica", 310, "16x23x3 cm", "0.6 kg"),
-    new Libro("Libro 24", "Autor 24", "Género 24", "Español", 21.99, "Tapa dura", "ISBN24", "Descripción del libro 24", "Nuevo", "Ubicación 24", "2023-01-24", "Editorial Específica", 260, "17x24x3 cm", "0.7 kg"),
-    new Libro("Libro 25", "Autor 25", "Género 25", "Español", 23.99, "Tapa blanda", "ISBN25", "Descripción del libro 25", "Nuevo", "Ubicación 25", "2023-01-25", "Editorial Específica", 120, "18x25x2 cm", "0.3 kg")
-);
-
-// Esta Función es para formatear la información de un libro
-const formatoLibro = (libro) => {
-    return `Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Precio: ${libro.precio}`;
-};
-
-// Utilizando el método .map para aplicar la función a cada libro
-const librosFormateados = libros.map(libro => formatoLibro(libro));
-
-// Mostrar los libros formateados
-console.log("Libros:");
-librosFormateados.forEach(libro => console.log(libro));
-
-// Crear 10 iteraciones diferentes manteniendo el atributo Titulo
-const iteraciones = [];
-for (let i = 0; i < 10; i++) {
-    const librosModificados = libros.map((libro, index) => {
-        return new Libro(
-            `Libro ${index + 1 + (i * 10)}`,
-            libro.autor,
-            libro.genero,
-            libro.idioma,
-            libro.precio + (i * 5), // Modificar el precio para cada iteración
-            libro.formato,
-            libro.isbn,
-            libro.descripcion,
-            libro.estado,
-            libro.ubicacion,
-            libro.fecha_publicacion,
-            libro.editorial,
-            libro.paginas,
-            libro.dimensiones,
-            libro.peso
-        );
-    });
-    iteraciones.push(librosModificados);
+function agregarLibro(libro) {
+    pilaLibros.push(libro);
+    console.log("Libro agregado:");
+    console.table([libro]);
 }
 
-// Mostrar los títulos de los libros de cada iteración
-iteraciones.forEach((iteracion, index) => {
-    console.log(`Iteración ${index + 1}:`);
-    iteracion.forEach(libro => console.log(libro.titulo));
-});
+function quitarLibro() {
+    const libroRemovido = pilaLibros.pop();
+    if (libroRemovido) {
+        console.log("Libro removido:");
+        console.table([libroRemovido]);
+    } else {
+        console.log("No hay libros en la pila.");
+    }
+}
 
-// Agregar el atributo "descuento" a cada libro en el array
-const librosConDescuento = libros.map(libro => {
-    // Calcular el descuento como el 20% del precio actual
-    const descuento = libro.precio * 0.20;
-    // Crear un nuevo objeto libro con el atributo "descuento" agregado
-    return {
-        ...libro, // Copiar todas las propiedades existentes del libro
-        descuento // Agregar el atributo "descuento"
-    };
-});
+function mostrarPila() {
+    console.log("Pila actual de libros:");
+    console.table(pilaLibros);
+}
 
-// Mostrar los libros con el atributo "descuento"
-console.log("Libros con descuento:");
-librosConDescuento.forEach(libro => {
-    console.log(libro);
-});
+function listarLibros() {
+    console.log("Lista de libros:");
+    console.table(pilaLibros);
+}
 
-// Función para formatear la información de un libro con descuento
-const formatoLibroConDescuento = (libro) => {
-    return `Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Precio: ${libro.precio}, Descuento: ${libro.descuento}`;
-};
+function listarLibrosConDescuento() {
+    const librosConDescuento = pilaLibros.map(libro => ({
+        ...libro,
+        descuento: libro.precio * 0.2
+    }));
+    console.log("Libros con descuento:");
+    console.table(librosConDescuento);
+}
 
-// Utilizando el método .map para aplicar la función a cada libro con descuento
-const librosFormateadosConDescuento = librosConDescuento.map(libro => formatoLibroConDescuento(libro));
+function librosCarosYResumen(){
+    const librosCarosYResumen = pilaLibros.filter(libro => libro.precio > 20).sort((a, b) => b.precio - a.precio).map(libro => ({
+        titulo: libro.titulo,
+        autor: libro.autor,
+        precio: libro.precio
+    }));
+    console.log("Libros caros ordenados de mayor a menor:");
+    console.table(librosCarosYResumen);
+}
 
-// Mostrar los libros formateados con descuento
-console.log("Libros con descuento:");
-librosFormateadosConDescuento.forEach(libro => console.log(libro));
+function ordenarLibrosPorPaginas() {
+    const librosOrdenados = [...pilaLibros].sort((a, b) => b.paginas - a.paginas);
+    console.log("Libros ordenados por páginas de mayor a menor:");
+    console.table(librosOrdenados);
+}
 
-// Filtrar los libros con precio mayor a 50 dólares
-const librosPrecioMayor50 = libros.filter(libro => libro.precio > 50);
+function resumenesEncadenados() {
+    const librosCarosPorTitulo = pilaLibros.filter(libro => libro.precio > 11).map(libro => ({
+        titulo: libro.titulo,
+        autor: libro.autor,
+        precio: libro.precio
+    }));
+    console.log("Libros caros por título:");
+    console.table(librosCarosPorTitulo);
 
-// Mostrar los libros que cumplen con el criterio
-console.log("Libros con precio mayor a 50 dólares:");
-librosPrecioMayor50.forEach(libro => console.log(libro));
+    const librosMenosDe100Paginas = pilaLibros.filter(libro => libro.paginas < 100).map(libro => ({
+        titulo: libro.titulo,
+        autor: libro.autor,
+        editorial: libro.editorial,
+        paginas: libro.paginas
+    }));
+    console.log("Libros con menos de 100 páginas:");
+    console.table(librosMenosDe100Paginas);
 
-// Paso 1: Encontrar el libro con el número más alto de páginas
-const libroMasPaginas = libros.reduce((libroActual, libroSiguiente) => {
-    return libroActual.paginas > libroSiguiente.paginas ? libroActual : libroSiguiente;
-});
+    const librosCarosOrdenados = pilaLibros.filter(libro => libro.precio > 20).sort((a, b) => b.precio - a.precio).map(libro => ({
+        titulo: libro.titulo,
+        autor: libro.autor,
+        precio: libro.precio
+    }));
+    console.log("Libros caros ordenados de mayor a menor:");
+    console.table(librosCarosOrdenados);
 
-// Paso 2: Crear un nuevo arreglo con los detalles del libro encontrado
-const resumenLibroMasPaginas = [{
-    titulo: libroMasPaginas.titulo,
-    autor: libroMasPaginas.autor,
-    editorial: libroMasPaginas.editorial,
-    paginas: libroMasPaginas.paginas
-}];
+    const librosPorPaginas = pilaLibros.sort((a, b) => b.paginas - a.paginas).map(libro => ({
+        titulo: libro.titulo,
+        autor: libro.autor,
+        editorial: libro.editorial,
+        paginas: libro.paginas
+    }));
+    console.log("Libros por número más alto de páginas ordenados de mayor a menor:");
+    console.table(librosPorPaginas);
+}
 
-// Paso 3: Mostrar el resumen del libro con el número más alto de páginas
-console.log("Resumen del libro con más páginas:");
-resumenLibroMasPaginas.forEach(libro => {
-    console.log(`Título: ${libro.titulo}, Autor: ${libro.autor}, Editorial: ${libro.editorial}, Páginas: ${libro.paginas}`);
-});
 
-// Define una función de comparación para ordenar los libros por número de páginas de mayor a menor
-const compararPorPaginas = (libroA, libroB) => {
-    return libroB.paginas - libroA.paginas;
-};
+function buscarLibroPorTitulo(titulo) {
+    const libroEncontrado = pilaLibros.find(libro => libro.titulo === titulo);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por título:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
 
-// Ordena los libros utilizando la función de comparación
-libros.sort(compararPorPaginas);
+function buscarLibroPorAutor(autor) {
+    const libroEncontrado = pilaLibros.find(libro => libro.autor === autor);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por autor:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
 
-// Muestra los libros ordenados por número de páginas de mayor a menor
-console.log("Libros ordenados por número de páginas de mayor a menor:");
-libros.forEach(libro => console.log(libro.titulo, "-", libro.paginas, "páginas"));
+function buscarLibroPorFechaPublicacion(fecha) {
+    const libroEncontrado = pilaLibros.find(libro => libro.fechaPublicacion === fecha);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por fecha de publicación:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorGenero(genero) {
+    const libroEncontrado = pilaLibros.find(libro => libro.genero === genero);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por género:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+function buscarLibroPorIdioma(idioma) {
+    const libroEncontrado = pilaLibros.find(libro => libro.idioma === idioma);
+    if (libroEncontrado) {
+        console.log("Libro encontrado por idioma:");
+        console.table([libroEncontrado]);
+    } else {
+        console.log("Libro no encontrado.");
+    }
+}
+
+
+function iteracionesDeBusqueda() {
+    const titulos = [
+        'Cien años de soledad', 'El amor en los tiempos del cólera', 'El Señor de los Anillos: La Comunidad del Anillo', '1984', 'Orgullo y Prejuicio',
+        'Harry Potter y la Piedra Filosofal', 'El Hobbit', 'Matar a un Ruiseñor', 'Don Quijote de la Mancha', 'Crónicas Marcianas'
+    ];
+
+    for (let i = 0; i < titulos.length; i++) {
+        buscarLibroPorTitulo(titulos[i]);
+    }
+}
+
+
+function menu() {
+    let opcion;
+    do {
+        opcion = prompt(`Seleccione una opción:
+        1. Agregar libro
+        2. Quitar libro
+        3. Mostrar pila de libros
+        4. Listar libros
+        5. Listar libros con descuento
+        6. Libros caros y resumen
+        7. Ordenar libros por páginas
+        8. Resúmenes encadenados
+        9. Buscar libro por título
+        10. Buscar libro por autor
+        11. Buscar libro por fecha de publicación
+        12. Buscar libro por género
+        13. Buscar libro por idioma
+        14. Iteraciones de búsqueda
+        15. Salir`);
+        
+        switch (opcion) {
+            case '1':
+                agregarLibro();
+                break;
+            case '2':
+                quitarLibro();
+                break;
+            case '3':
+                mostrarPila();
+                break;
+            case '4':
+                listarLibros();
+                break;
+            case '5':
+                listarLibrosConDescuento();
+                break;
+            case '6':
+                librosCarosYResumen();
+                break;
+            case '7':
+                ordenarLibrosPorPaginas();
+                break;
+            case '8':
+                resumenesEncadenados();
+                break;
+            case '9':
+                const titulo = prompt("Ingrese el título del libro:");
+                buscarLibroPorTitulo(titulo);
+                break;
+            case '10':
+                const autor = prompt("Ingrese el autor del libro:");
+                buscarLibroPorAutor(autor);
+                break;
+            case '11':
+                const fecha = prompt("Ingrese la fecha de publicación del libro (YYYY-MM-DD):");
+                buscarLibroPorFechaPublicacion(fecha);
+                break;
+            case '12':
+                const genero = prompt("Ingrese el género del libro:");
+                buscarLibroPorGenero(genero);
+                break;
+            case '13':
+                const idioma = prompt("Ingrese el idioma del libro:");
+                buscarLibroPorIdioma(idioma);
+                break;
+            case '14':
+                iteracionesDeBusqueda();
+                break;
+            case '15':
+                console.log("Saliendo...");
+                break;
+            default:
+                console.log("Opción no válida");
+        }
+    } while (opcion !== '15');
+}
+
+
+menu();
